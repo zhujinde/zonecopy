@@ -1,0 +1,12 @@
+# IDE
+.idea/
+.vscode/
+.env
+edgeone.code-workspace
+
+# OS
+**/*.DS_Store
+
+# progect
+cp.log
+cp.yaml

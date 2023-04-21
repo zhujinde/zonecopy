@@ -1,0 +1,11 @@
+# 客户配置
+log_path: ./cp.log
+account:
+  secret_id: xxx
+  secret_key: xxx
+  end_point: teo.tencentcloudapi.com
+  region: ap-guangzhou
+template_zone: zjd.asia
+template_zone_id: zone-2dqo3q94x9ks
+target_zone: example.com
+target_zone_id: zone-2ginev8u1owi
