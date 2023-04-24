@@ -26,8 +26,6 @@ type ZoneCopyConfig struct {
 	TemplateZoneId string           `yaml:"template_zone_id" validate:"required"`
 	TargetZone     string           `yaml:"target_zone" validate:"required"`
 	TargetZoneId   string           `yaml:"target_zone_id" validate:"required"`
-	//Origin         map[string]string `yaml:"origin"`      // 源站组Name -> GroupId
-	//RuleEngine     map[string]string `yaml:"rule_engine"` // 规则引擎 host -> RuleId
 }
 
 func InitZoneCopyConfig(configPath string) *ZoneCopyConfig {
@@ -40,17 +38,11 @@ func InitZoneCopyConfig(configPath string) *ZoneCopyConfig {
 	if err != nil {
 		panic(any(err))
 	}
-	//if c.Origin == nil {
-	//	c.Origin = make(map[string]string)
-	//}
-	//if c.RuleEngine == nil {
-	//	c.RuleEngine = make(map[string]string)
-	//}
 	log.SetFlags(log.Llongfile | log.Lmicroseconds | log.Ldate)
 	logFile, err := os.OpenFile(c.LogPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 
 	boby, _ := json.Marshal(c)
-	log.Printf("###### Init: %#v\n", string(boby))
+	log.Printf("config init: %#v\n", string(boby))
 	if err != nil {
 		panic(any(err))
 	}

@@ -1,11 +1,11 @@
 # 客户配置
-log_path: ./cp.log
+log_path: ./cp.log  # 运行日志保存路径
 account:
-  secret_id: xxx
+  secret_id: xxx    # 账号密钥信息
   secret_key: xxx
-  end_point: teo.tencentcloudapi.com
-  region: ap-guangzhou
-template_zone: zjd.asia
-template_zone_id: zone-2dqo3q94x9ks
-target_zone: example.com
-target_zone_id: zone-2ginev8u1owi
+  end_point: teo.tencentcloudapi.com  # 固定配置
+  region: ap-guangzhou # 固定配置
+template_zone: zjd.asia   # 模板站点名
+template_zone_id: zone-2dqo3q94x9ks  # 模板站点Id
+target_zone: example.com  # 目标站点名
+target_zone_id: zone-2ginev8u1owi # 目标站点Id

@@ -8,5 +8,5 @@ edgeone.code-workspace
 **/*.DS_Store
 
 # progect
-cp.log
+**/*.log
 cp.yaml
