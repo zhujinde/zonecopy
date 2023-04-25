@@ -9,6 +9,12 @@ import (
 )
 
 func main() {
+	defer func() {
+		if r := recover(); r != any(nil) {
+			fmt.Println("[panic]", r)
+		}
+	}()
+
 	var module string
 	flag.StringVar(&module, "module", "", "导入指定模块配置 \norigin: 源站组 \ndomain: 域名管理 \nzonesetting: 站点加速配置 \nrule: 规则引擎 \nall: 全部模块")
 	//解析参数
