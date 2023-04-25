@@ -16,29 +16,42 @@
 
 ## 配置文件准备
 
-请参照配置模版 cp.yaml.template 填写配置信息
+请参照配置模版 cmd/cp.yaml.template 填写配置信息
+```
+# cp.yaml
+log_path: ./cp.log  # 运行日志保存路径
+account:
+  secret_id: xxx    # 账号密钥信息
+  secret_key: xxx
+  end_point: teo.tencentcloudapi.com  # 固定配置
+  region: ap-guangzhou # 固定配置
+template_zone: zjd.asia   # 模板站点名
+template_zone_id: zone-2dqo3q94x9ks  # 模板站点Id
+target_zone: example.com  # 目标站点名
+target_zone_id: zone-2ginev8u1owi # 目标站点Id
+```
 
 ## 编译运行
 
 ### 编译
 
-go build -o main main.go
+go build -o zcp main.go
 
 ### 使用说明
 
 因为模块存在依赖关系(origin > domain > rule)，如域名服务依赖于源站组服务，规则引擎服务依赖源站服务和域名服务，分模块导入时，务必确保导入顺序。
 
-如 ./main -module rule 单独导入规则引擎配置时，务必确保domain和origin配置已经导入，否则可能会导致导入失败.
+如 ./zcp -module rule 单独导入规则引擎配置时，务必确保依赖于domain和origin的相关配置已经导入，否则可能会导致导入失败。
 
 ### 示例
 
 1. 查看使用说明
 
 ```bash
-./main -help
-
-Usage of ./main:
--module string
+./zcp -help
+  -config string
+        配置文件路径 (default "./config/cp.yaml")
+  -module string
         导入指定模块配置 
         origin: 源站组 
         domain: 域名管理 
@@ -50,13 +63,13 @@ Usage of ./main:
 2. 按顺序全部拷贝
 
 ```bash
-./main -module all   
+./zcp -config ./cp.yaml -module all  
 ```
 
 3. 拷贝域名配置
 
 ```bash
-./main -module domain
+./zcp -config ./cp.yaml -module domain
 ```
 
 ## 模块说明

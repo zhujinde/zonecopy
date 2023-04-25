@@ -40,14 +40,12 @@ func InitZoneCopyConfig(configPath string) *ZoneCopyConfig {
 	}
 	log.SetFlags(log.Lshortfile | log.Ltime | log.Ldate)
 	logFile, err := os.OpenFile(c.LogPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
-	log.SetOutput(logFile)
-
-	boby, _ := json.Marshal(c)
-	log.Printf("config init: %#v\n", string(boby))
 	if err != nil {
 		panic(any(err))
 	}
-
+	log.SetOutput(logFile)
+	boby, _ := json.Marshal(c)
+	log.Printf("config init: %#v\n", string(boby))
 	return c
 }
 
