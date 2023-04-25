@@ -15,8 +15,9 @@ func main() {
 		}
 	}()
 
-	var module string
+	var configPath, module string
 	flag.StringVar(&module, "module", "", "导入指定模块配置 \norigin: 源站组 \ndomain: 域名管理 \nzonesetting: 站点加速配置 \nrule: 规则引擎 \nall: 全部模块")
+	flag.StringVar(&configPath, "config", "./config/cp.yaml", "配置文件路径")
 	//解析参数
 	flag.Parse()
 	var modules []FuncModule
@@ -35,7 +36,7 @@ func main() {
 		panic(any("unsupported module!"))
 	}
 
-	c := entity.InitZoneCopyConfig(defaultConfigPath)
+	c := entity.InitZoneCopyConfig(configPath)
 	z := usecase.NewZoneCopyManager(c)
 	for i, _ := range modules {
 		modules[i](z)
@@ -73,5 +74,4 @@ var (
 			fmt.Println("====> rule engine import success!")
 		}
 	}
-	defaultConfigPath = "./config/cp.yaml"
 )

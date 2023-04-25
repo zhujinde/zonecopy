@@ -16,7 +16,6 @@
 
 ## 配置文件准备
 
-配置文件位置：zonecopy/cmd/config/cp.yaml   
 请参照配置模版 cp.yaml.template 填写配置信息
 
 ## 编译运行
