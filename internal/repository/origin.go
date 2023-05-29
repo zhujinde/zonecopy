@@ -34,7 +34,8 @@ func (o *OriginManager) DescribeOriginGroupList(zoneId string) ([]*teo.OriginGro
 
 	request := teo.NewDescribeOriginGroupRequest()
 	request.Offset = common.Uint64Ptr(0)
-	request.Limit = common.Uint64Ptr(10)
+	limit := uint64(500)
+	request.Limit = common.Uint64Ptr(limit)
 	request.Filters = []*teo.AdvancedFilter{
 		&teo.AdvancedFilter{
 			Name:   common.StringPtr("zone-id"),
@@ -50,8 +51,10 @@ func (o *OriginManager) DescribeOriginGroupList(zoneId string) ([]*teo.OriginGro
 	if err != nil {
 		return nil, zerr.Wrap(err, "interal error")
 	}
+	if *response.Response.TotalCount >= limit {
+		return nil, zerr.Wrap(err, "the number of origin groups exceed maximum limit")
+	}
 	log.Printf("[API] DescribeOriginGroupList response: %#v", response.ToJsonString())
-
 	return response.Response.OriginGroups, nil
 }
 
